@@ -34,3 +34,13 @@ export const GetObjectives = async (dispatch) => {
         console.log('Get objectives Error');
     }
 }
+
+export const NewObjective = async (dispatch, obj) => {
+    try {
+        dispatch(ActionCreators.newObjective({ id: 10, name: obj.name, description: obj.description, status_id: obj.status_id }));
+
+        //api call
+    } catch {
+        console.log('Create objective error');
+    }
+}
