@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import { Form, Row, Col, Button } from "react-bootstrap";
-import { NewObjective } from '../services/objectives';
+import { DeleteObjective, EditObjective, NewObjective } from '../services/objectives';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default ({ objective }) => {
+export default ({ objective, setIsEditing }) => {
     const status_names = useSelector(state => state.objectivesReducer.statuses);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -30,7 +30,8 @@ export default ({ objective }) => {
                 NewObjective(dispatch, { name: name, description: description, status_id: Number(status_id) });
             } else {
                 //Edit Task
-                
+                EditObjective(dispatch, { id: objective.id, name: name, description: description, status_id: Number(status_id) });
+                setIsEditing(false);
             }
         }}
     >
@@ -53,11 +54,23 @@ export default ({ objective }) => {
                     onChange={event => setDescription(event.target.value)}
                 />
             </Col>
-            <Col md="auto" style={{ marginTop: 'auto' }} >
-                <div style={{ textAlign: 'right' }}>
-                    <Button variant='primary' type='submit'>Добавить</Button>
-                </div>
-            </Col>
+            {isNewObjective
+                ? <Col md="auto" style={{ marginTop: 'auto' }} >
+                    <div style={{ textAlign: 'right' }}>
+                        <Button variant='primary' type='submit'>Добавить</Button>
+                    </div>
+                </Col>
+                : <div />
+            }
         </Row>
+        {isNewObjective
+            ? <div />
+            : <div style={{ textAlign: 'right' }}>
+                <br />
+                <Button style={{ marginLeft: '1rem' }} variant='outline-success' type='submit'>Сохранить</Button>
+                <Button style={{ marginLeft: '1rem' }} variant='outline-danger' onClick={() => DeleteObjective(dispatch, objective)}>Удалить</Button>
+                <Button style={{ marginLeft: '1rem' }} variant='outline-secondary' onClick={() => setIsEditing(false)}>Отмена</Button>
+            </div>
+        }
     </Form>
 }

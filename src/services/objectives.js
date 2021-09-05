@@ -2,7 +2,6 @@ import { ActionCreators } from "../app/objectivesReducer";
 
 export const GetStatuses = async (dispatch) => {
     try {
-        
         const statuses = [
             { status_id: 1, status_name: 'Создана' },
             { status_id: 2, status_name: 'В работе' },
@@ -19,7 +18,6 @@ export const GetStatuses = async (dispatch) => {
 
 export const GetObjectives = async (dispatch) => {
     try {
-        
         const objectives = [
             { id: 1, name: 'task', description: 'Some text for description here', status_id: 2 },
             { id: 2, name: 'Имя', description: 'Описание\nс\nпереносом\nстрок', status_id: 3 },
@@ -42,5 +40,25 @@ export const NewObjective = async (dispatch, obj) => {
         //api call
     } catch {
         console.log('Create objective error');
+    }
+}
+
+export const EditObjective = async (dispatch, obj) => {
+    try {
+        dispatch(ActionCreators.editObjective(obj));
+
+        //api call
+    } catch {
+        console.log('Edit objective error');
+    }
+}
+
+export const DeleteObjective = async (dispatch, obj) => {
+    try {
+        dispatch(ActionCreators.deleteObjective(obj));
+
+        //api call
+    } catch {
+        console.log('Delete objective error');
     }
 }
