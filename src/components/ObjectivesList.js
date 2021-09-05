@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetObjectives, GetStatuses } from "../services/objectives";
+import { GetObjectives } from "../services/objectives";
 import { Button, Row, Col } from "react-bootstrap";
 import ExpenseForm from "./ObjectiveForm";
 
@@ -10,7 +10,6 @@ export default () => {
     const objectives = useSelector(state => state.objectivesReducer.objectives);
 
     useEffect(() => {
-        GetStatuses(dispatch);
         GetObjectives(dispatch);
     }, []);
 

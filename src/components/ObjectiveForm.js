@@ -38,7 +38,7 @@ export default ({ objective, setIsEditing }) => {
         <Row>
             <Col md={2}>
                 <Form.Label>Статус</Form.Label>
-                <Form.Select as='select'
+                <Form.Select as='select' value={status_id}
                     onChange={event => setStatus_Name(event.target.value)}>
                     {status_names.map(e => <option value={e.status_id}>{e.status_name}</option>)}
                 </Form.Select >
